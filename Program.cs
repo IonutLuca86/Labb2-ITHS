@@ -2,6 +2,24 @@
 
 
 
+
+using Labb2;
+using Labb2_ITHS;
+
+List<KöksApparater> apparats = new List<KöksApparater>()
+{
+ new KöksApparater("MicroUngn","Electrolux",true),
+ new KöksApparater("Brödrost", "Andersson", true),
+ new KöksApparater("Våffeljärn", "OBH Nordica",true),
+ new KöksApparater("Vattenkokare","Andersson", true),
+ new KöksApparater("Ugn", "Electrolux",false)
+};
+
+
+
+Submenu submenu = new Submenu();
+
+
 bool menu = true;
 while (menu)
 {
