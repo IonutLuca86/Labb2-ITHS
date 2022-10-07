@@ -14,8 +14,8 @@ namespace Labb2_ITHS
 
     public class Submenu
     {
-        string inputType, inputBrand;
-        bool yesOrNo;
+        string inputType = string.Empty, inputBrand = string.Empty;
+        bool yesOrNo = false;
         int input = 0;
 
         public void visaListaK(List<KöksApparater> lista)
@@ -68,18 +68,49 @@ namespace Labb2_ITHS
             Console.WriteLine("Ange om den funkar eller inte (j/n) :");
             yesOrNo = YesOrNo(Console.ReadLine());
             var apparat = new KöksApparater(inputType, inputBrand, yesOrNo);
-            lista.Add(apparat);
-            Console.WriteLine("\nKöksapparaten laggt till kökets lista!\n\n");
-            Console.WriteLine("Vill du lägga till fler apparater? (j/n)");
-            Console.Write(" -> ");
-            yesOrNo = YesOrNo(Console.ReadLine());
-            if (yesOrNo == true)
+
+            if (CheckIfFinds(lista, apparat) == true)
             {
-                Console.Clear();
-                läggTill(lista);
+                Console.WriteLine($"En köksapparat med samma namn,av samma märke och som {CheckIsFunctioning(apparat)} finns redan i listan!");
+                Console.WriteLine("Är du säker att du vill lägga till ändå? (j/n)");
+
+                if (YesOrNo(Console.ReadLine()) == true)
+                {
+                    lista.Add(apparat);
+                    Console.WriteLine("\nKöksapparaten laggt till kökets lista!\n\n");
+
+                    Console.WriteLine("Vill du lägga till fler apparater? (j/n)");
+                    Console.Write(" -> ");
+                    yesOrNo = YesOrNo(Console.ReadLine());
+                    if (yesOrNo == true)
+                    {
+                        Console.Clear();
+                        läggTill(lista);
+                    }
+                    else
+                        Console.WriteLine("Tillbaka till huvudmeny!\n");
+                }
+                else
+                    läggTill(lista);
             }
             else
-                Console.WriteLine("Tillbaka till huvudmeny!\n");
+            {
+                lista.Add(apparat);
+                Console.WriteLine("\nKöksapparaten laggt till kökets lista!\n\n");
+
+                Console.WriteLine("Vill du lägga till fler apparater? (j/n)");
+                Console.Write(" -> ");
+                yesOrNo = YesOrNo(Console.ReadLine());
+                if (yesOrNo == true)
+                {
+                    Console.Clear();
+                    läggTill(lista);
+                }
+                else
+                    Console.WriteLine("Tillbaka till huvudmeny!\n");
+            }
+          
+           
         }
 
 
@@ -156,6 +187,22 @@ namespace Labb2_ITHS
                 YesOrNo(s);
             }
             return getbool;
+        }
+
+        private static bool CheckIfFinds(List<KöksApparater> lista, KöksApparater apparat)
+        { 
+            bool itFinds = false;
+
+            foreach (var app in lista)
+            { 
+                if(app.Type.ToString().Equals(apparat.Type.ToString()) &&
+                    app.Brand.ToString().Equals(apparat.Brand.ToString()) &&
+                    app.IsFunctioning.Equals(apparat.IsFunctioning))
+                    itFinds = true;
+                
+            }
+            return itFinds;
+           
         }
 
        
