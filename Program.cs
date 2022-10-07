@@ -10,9 +10,10 @@ List<KöksApparater> apparats = new List<KöksApparater>()
 {
  new KöksApparater("MicroUngn","Electrolux",true),
  new KöksApparater("Brödrost", "Andersson", true),
- new KöksApparater("Våffeljärn", "OBH Nordica",true),
+ new KöksApparater("Våffeljärn", "OBH Nordica",false),
  new KöksApparater("Vattenkokare","Andersson", true),
- new KöksApparater("Ugn", "Electrolux",false)
+ new KöksApparater("Ugn", "Electrolux",false),
+ new KöksApparater("Spis","Bosch",true)
 };
 
 
@@ -45,12 +46,16 @@ static bool GenerateMainMenu(List<KöksApparater> apparats, Submenu submenu)
         case 1:
             {
                 Console.Clear();
-                submenu.AnvändApparat(apparats);
+                submenu.användApparat(apparats);
                 Console.WriteLine("\n\n");
                 return true;
             }
         case 2:
-            return true;
+            {
+                Console.Clear();
+                submenu.läggTill(apparats);
+                return true;
+            }
         case 3:
             {
                 Console.Clear();
@@ -59,7 +64,11 @@ static bool GenerateMainMenu(List<KöksApparater> apparats, Submenu submenu)
                 return true;
             }
         case 4:
-            return true;
+            {
+                Console.Clear();
+                submenu.taBort(apparats);
+                return true;
+            }
         case 0:
             return false;
         default:

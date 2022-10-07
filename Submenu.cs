@@ -12,55 +12,101 @@ namespace Labb2_ITHS
     
     
 
-    public class Submenu 
+    public class Submenu
     {
-        
+        string inputType, inputBrand;
+        bool yesOrNo;
+        int input = 0;
+
         public void visaListaK(List<KöksApparater> lista)
         {
+            Console.WriteLine("\t====== Lista av Köksapparater ======= \n");
             Console.WriteLine($"Lista över alla köksapparater i köket är: ");
             int counter = 1;
-            string function = string.Empty;
+            
             foreach (var apparat in lista)
-            {                              
-                if (apparat.IsFunctioning == true) 
-                    function = "funkar bra";
-                else if (apparat.IsFunctioning == false)
-                    function = "är urfunktion";
-                Console.WriteLine($"\t{counter}. {apparat.Type} av märke {apparat.Brand} som {function}");
+            {   
+                Console.WriteLine($"\t{counter}. {apparat.Type} av märke {apparat.Brand} som {CheckIsFunctioning(apparat)}");
                 counter++;
             }
            
         }
 
-        public void AnvändApparat(List<KöksApparater> lista)
+        public void användApparat(List<KöksApparater> lista)
         {
-           
+            Console.WriteLine("\t====== Användning av köksapparater ======\n"); 
             Console.WriteLine("Vilken köksapparat vill du använda? :");
             visaListaK(lista);
-            int input = GetInput(lista);
+            input = GetInput(lista);
             if (lista[input-1].IsFunctioning != false) 
                 lista[input-1].Use(lista[input-1].Type);
             else
             {
                 Console.WriteLine($"Köksapparaten {lista[input - 1].Type} är urfunktion!");
-                Console.WriteLine("Vill du använda en annan köksapparat? J/N");
-
+                Console.WriteLine("Vill du använda en annan köksapparat? (j/n)");
                 Console.Write(" -> ");
-                string input2 = Console.ReadLine();
-                if (input2 == "j" || input2 == "J")
-                    AnvändApparat(lista);
+                yesOrNo = YesOrNo(Console.ReadLine());
+                if (yesOrNo == true)
+                    användApparat(lista);
                 else
-                    if (input2 == "n" || input2 == "N")
-                    Console.Clear();
-                else
-                    Console.WriteLine("Ange bara j eller J om du vill använda en annan köksapparat \n eller n/N för att avbryta och gp till förregående menu");
+                    Console.WriteLine("Tillbaka till huvudmeny!\n");
+                
             }
 
 
         }
-           
 
-        
+        public void läggTill(List<KöksApparater> lista)
+        {
+            
+      
+            Console.WriteLine("\t====== Lägg till en ny köksapparat! ====== \n");
+            Console.WriteLine("Ange köksapparatens namn :");
+            inputType = Console.ReadLine();
+            Console.WriteLine("Ange köksapparatens märke :");
+            inputBrand = Console.ReadLine();
+            Console.WriteLine("Ange om den funkar eller inte (j/n) :");
+            yesOrNo = YesOrNo(Console.ReadLine());
+            var apparat = new KöksApparater(inputType, inputBrand, yesOrNo);
+            lista.Add(apparat);
+            Console.WriteLine("\nKöksapparaten laggt till kökets lista!\n\n");
+            Console.WriteLine("Vill du lägga till fler apparater? (j/n)");
+            Console.Write(" -> ");
+            yesOrNo = YesOrNo(Console.ReadLine());
+            if (yesOrNo == true)
+            {
+                Console.Clear();
+                läggTill(lista);
+            }
+            else
+                Console.WriteLine("Tillbaka till huvudmeny!\n");
+        }
+
+
+
+        public void taBort(List<KöksApparater> lista)
+        {
+            Console.WriteLine("\t====== Ta bort Köksapparater ======\n");
+            visaListaK(lista);
+            Console.WriteLine($"Ange vilken apparat vill du ta bort :");
+            input = GetInput(lista);
+            lista.Remove(lista[input-1]);
+            Console.WriteLine("\nKöksapparaten är borta från kökets lista!\n\n");
+            Console.WriteLine("Vill du ta bort fler apparater? (j/n)");
+            Console.Write(" -> ");
+            yesOrNo = YesOrNo(Console.ReadLine());
+            if (yesOrNo == true)
+            {
+                Console.Clear();
+                taBort(lista);
+            }
+            else
+                Console.WriteLine("Tillbaka till huvudmeny!\n");
+
+        }
+
+       
+
 
         private static int GetInput(List<KöksApparater> lista)
         {
@@ -85,6 +131,33 @@ namespace Labb2_ITHS
 
             return choice;
         }
+
+        private static string CheckIsFunctioning(KöksApparater apparat)
+        {
+            string function = string.Empty;
+            if (apparat.IsFunctioning == true)
+                return function = "funkar bra";
+            else if (apparat.IsFunctioning == false)
+                return function = "är urfunktion";
+            return function;
+        }
+        
+
+        private static bool YesOrNo(string s)
+        {
+            bool getbool = false;
+            if (s == "j")
+                getbool = true;
+            else if (s == "n")
+                getbool = false;
+            else
+            {
+                Console.WriteLine("Skriv 'j' eller 'J' om JA eller 'n'/'N' om NEJ! ");
+                YesOrNo(s);
+            }
+            return getbool;
+        }
+
        
     }
 

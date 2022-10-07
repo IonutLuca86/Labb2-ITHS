@@ -12,10 +12,7 @@ namespace Labb2
 
 public class KöksApparater : IKitchenAppliance
 {
-    //public string type;
-    //public string brand;
-    //public bool isFunctioning;
-
+    
 
     public string Type { get; set; }
     public string Brand { get; set; }
