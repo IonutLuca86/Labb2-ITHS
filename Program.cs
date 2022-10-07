@@ -29,7 +29,7 @@ while (menu)
 
 static bool GenerateMainMenu(List<KöksApparater> apparats, Submenu submenu)
 {
-
+  
     Console.WriteLine("\n============================= Köket ==================================\n");
     Console.WriteLine("\t 1. Använd Köksapparat");
     Console.WriteLine("\t 2. Lägg till köksapparat");
@@ -39,7 +39,7 @@ static bool GenerateMainMenu(List<KöksApparater> apparats, Submenu submenu)
     Console.WriteLine("\n======================================================================\n");
     Console.WriteLine("\n\t Ange ditt val: ");
     Console.WriteLine();
-
+    
 
     switch (GetChoice())
     {

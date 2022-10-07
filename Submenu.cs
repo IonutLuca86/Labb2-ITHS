@@ -29,7 +29,9 @@ namespace Labb2_ITHS
                 Console.WriteLine($"\t{counter}. {apparat.Type} av märke {apparat.Brand} som {CheckIsFunctioning(apparat)}");
                 counter++;
             }
-           
+            //ReturnToMain();
+
+            
         }
 
         public void användApparat(List<KöksApparater> lista)
@@ -38,19 +40,42 @@ namespace Labb2_ITHS
             Console.WriteLine("Vilken köksapparat vill du använda? :");
             visaListaK(lista);
             input = GetInput(lista);
-            if (lista[input-1].IsFunctioning != false) 
-                lista[input-1].Use(lista[input-1].Type);
+            if (lista[input - 1].IsFunctioning != false)
+            {
+                lista[input - 1].Use(lista[input - 1].Type);
+                Console.WriteLine("Vill du använda en annan köksapparat? (j/n)");
+                Console.Write(" -> ");
+
+                if (YesOrNo(Console.ReadLine()) == true)
+                {
+                    Console.Clear();
+                    användApparat(lista);
+                }
+                else
+                {
+                    Console.WriteLine("Tillbaka till huvudmeny!\n");
+                    ReturnToMain();
+                }
+                    
+                
+            }
             else
             {
                 Console.WriteLine($"Köksapparaten {lista[input - 1].Type} är urfunktion!");
                 Console.WriteLine("Vill du använda en annan köksapparat? (j/n)");
                 Console.Write(" -> ");
-                yesOrNo = YesOrNo(Console.ReadLine());
-                if (yesOrNo == true)
+             
+                if (YesOrNo(Console.ReadLine()) == true)
+                {
+                    Console.Clear();
                     användApparat(lista);
+                }
                 else
+                {
                     Console.WriteLine("Tillbaka till huvudmeny!\n");
-                
+                    ReturnToMain();
+                }
+
             }
 
 
@@ -62,10 +87,13 @@ namespace Labb2_ITHS
       
             Console.WriteLine("\t====== Lägg till en ny köksapparat! ====== \n");
             Console.WriteLine("Ange köksapparatens namn :");
+            Console.Write(" -> ");
             inputType = Console.ReadLine();
             Console.WriteLine("Ange köksapparatens märke :");
+            Console.Write(" -> ");
             inputBrand = Console.ReadLine();
             Console.WriteLine("Ange om den funkar eller inte (j/n) :");
+            Console.Write(" -> ");
             yesOrNo = YesOrNo(Console.ReadLine());
             var apparat = new KöksApparater(inputType, inputBrand, yesOrNo);
 
@@ -73,6 +101,7 @@ namespace Labb2_ITHS
             {
                 Console.WriteLine($"En köksapparat med samma namn,av samma märke och som {CheckIsFunctioning(apparat)} finns redan i listan!");
                 Console.WriteLine("Är du säker att du vill lägga till ändå? (j/n)");
+                Console.Write(" -> ");
 
                 if (YesOrNo(Console.ReadLine()) == true)
                 {
@@ -81,14 +110,17 @@ namespace Labb2_ITHS
 
                     Console.WriteLine("Vill du lägga till fler apparater? (j/n)");
                     Console.Write(" -> ");
-                    yesOrNo = YesOrNo(Console.ReadLine());
-                    if (yesOrNo == true)
+                  
+                    if (YesOrNo(Console.ReadLine()) == true)
                     {
                         Console.Clear();
                         läggTill(lista);
                     }
                     else
+                    {
                         Console.WriteLine("Tillbaka till huvudmeny!\n");
+                        ReturnToMain();
+                    }
                 }
                 else
                     läggTill(lista);
@@ -100,14 +132,17 @@ namespace Labb2_ITHS
 
                 Console.WriteLine("Vill du lägga till fler apparater? (j/n)");
                 Console.Write(" -> ");
-                yesOrNo = YesOrNo(Console.ReadLine());
-                if (yesOrNo == true)
+               
+                if (YesOrNo(Console.ReadLine()) == true)
                 {
                     Console.Clear();
                     läggTill(lista);
                 }
                 else
+                {
                     Console.WriteLine("Tillbaka till huvudmeny!\n");
+                    ReturnToMain();
+                }
             }
           
            
@@ -119,20 +154,23 @@ namespace Labb2_ITHS
         {
             Console.WriteLine("\t====== Ta bort Köksapparater ======\n");
             visaListaK(lista);
-            Console.WriteLine($"Ange vilken apparat vill du ta bort :");
+            Console.WriteLine($"Ange vilken apparat vill du ta bort :");        
             input = GetInput(lista);
             lista.Remove(lista[input-1]);
             Console.WriteLine("\nKöksapparaten är borta från kökets lista!\n\n");
             Console.WriteLine("Vill du ta bort fler apparater? (j/n)");
             Console.Write(" -> ");
-            yesOrNo = YesOrNo(Console.ReadLine());
-            if (yesOrNo == true)
+           
+            if (YesOrNo(Console.ReadLine()) == true)
             {
                 Console.Clear();
                 taBort(lista);
             }
             else
+            {
                 Console.WriteLine("Tillbaka till huvudmeny!\n");
+                ReturnToMain();
+            }
 
         }
 
@@ -167,9 +205,9 @@ namespace Labb2_ITHS
         {
             string function = string.Empty;
             if (apparat.IsFunctioning == true)
-                return function = "funkar bra";
+                function = "funkar bra";
             else if (apparat.IsFunctioning == false)
-                return function = "är urfunktion";
+                function = "är urfunktion";
             return function;
         }
         
@@ -203,6 +241,14 @@ namespace Labb2_ITHS
             }
             return itFinds;
            
+        }
+        private static void ReturnToMain()
+        {
+            Console.WriteLine("\nTryck ENTER för att gå tillbaka till huvudmeny");
+            if (Console.ReadKey().Key == ConsoleKey.Enter)
+                Console.Clear();
+            else
+                ReturnToMain();
         }
 
        
