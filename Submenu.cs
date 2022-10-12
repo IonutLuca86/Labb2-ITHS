@@ -10,14 +10,16 @@ using System.Threading.Tasks;
 namespace Labb2_ITHS
 {
     
-    
+    // skappad en ny class som ska hantera alla operationer som vi ska göra med köksapparater 
 
     public class Submenu
     {
-        string inputType = string.Empty, inputBrand = string.Empty;
-        bool yesOrNo = false;
-        int input = 0;
+        string inputType = string.Empty, inputBrand = string.Empty;  // variabel som används för att skappa en ny apparat 
+        bool yesOrNo = false;                                        // variable som används för att skappa en ny apparat
+        int input = 0;                                               // variable som vi ska använda för att läsa användare input från tangenbordet
 
+
+        // method som skriver ut lista av alla köksapparater, inklusiv dem som vi har lagt in i programet
         public void visaListaK(List<KöksApparater> lista)
         {
             Console.WriteLine("\t====== Lista av Köksapparater ======= \n");
@@ -29,11 +31,10 @@ namespace Labb2_ITHS
                 Console.WriteLine($"\t{counter}. {apparat.Type} av märke {apparat.Brand} som {CheckIsFunctioning(apparat)}");
                 counter++;
             }
-            //ReturnToMain();
-
-            
+                        
         }
 
+        // method som låter användaren att välja en apparat och "använda" den genom anrop till Use methoden definierat i Köksapparater classen
         public void användApparat(List<KöksApparater> lista)
         {
             Console.WriteLine("\t====== Användning av köksapparater ======\n"); 
@@ -81,6 +82,7 @@ namespace Labb2_ITHS
 
         }
 
+        // method som låter användaren lägga till en ny apparat 
         public void läggTill(List<KöksApparater> lista)
         {
             
@@ -149,7 +151,7 @@ namespace Labb2_ITHS
         }
 
 
-
+        //method som låter användaren ta bort en apparat från listan
         public void taBort(List<KöksApparater> lista)
         {
             Console.WriteLine("\t====== Ta bort Köksapparater ======\n");
@@ -176,7 +178,7 @@ namespace Labb2_ITHS
 
        
 
-
+        // method som läser in användarens input och returnerar den eller vad är som som har gåt fel
         private static int GetInput(List<KöksApparater> lista)
         {
             int choice = 0;
@@ -201,6 +203,8 @@ namespace Labb2_ITHS
             return choice;
         }
 
+        // method som returnerar i string format om en apparat funkar eller inte
+        // methoden används när vi skriver ut listan eller när en ny apparat skappas för att inte ha duplicater
         private static string CheckIsFunctioning(KöksApparater apparat)
         {
             string function = string.Empty;
@@ -211,7 +215,9 @@ namespace Labb2_ITHS
             return function;
         }
         
-
+        // method som låter användare välja mellan Ja eller NEJ och returnerar variabeln eller vad som har gått fel
+        // methoden används för att läsa isFuntioning attribut eller för att läsa om användaren vill fortsätta i samma submeny 
+        //  eller gå tillbaka
         private static bool YesOrNo(string s)
         {
             bool getbool = false;
@@ -227,6 +233,7 @@ namespace Labb2_ITHS
             return getbool;
         }
 
+        // method som kollar den nyskappad apparat om den redan finns i lista
         private static bool CheckIfFinds(List<KöksApparater> lista, KöksApparater apparat)
         { 
             bool itFinds = false;
@@ -242,6 +249,9 @@ namespace Labb2_ITHS
             return itFinds;
            
         }
+
+        //method som väntar så att användaren trycker Enter tangent för att gå tillbaka till huvudmeny
+        //på så sätt kan man läsa vad som står på skärmen innan den rensas och huvudmeny skrivas ut
         private static void ReturnToMain()
         {
             Console.WriteLine("\nTryck ENTER för att gå tillbaka till huvudmeny");

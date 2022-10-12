@@ -2,6 +2,7 @@ using Labb2;
 
 namespace Labb2
 {
+    // Kitchen appliances interface som vi ska jobba på
     public interface IKitchenAppliance
     {
         string Type { get; set; }
@@ -10,6 +11,9 @@ namespace Labb2
         void Use(string namn);
     }
 
+
+    // skappad en KöksApparat class för att kunna skappa och lagra information för varje apparat 
+    // baserad på IKitchenAppliace interface atributer
 public class KöksApparater : IKitchenAppliance
 {
     
@@ -17,6 +21,7 @@ public class KöksApparater : IKitchenAppliance
     public string Type { get; set; }
     public string Brand { get; set; }
     public bool IsFunctioning { get; set; }
+
     public void Use(string namn)
     {
         Console.WriteLine($"\n\nAnvändning av {namn} köksapparat!");

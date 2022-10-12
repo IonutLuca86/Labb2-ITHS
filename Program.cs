@@ -6,6 +6,8 @@
 using Labb2;
 using Labb2_ITHS;
 
+//skapar en lista med apparater för att kunna jobba med de 
+
 List<KöksApparater> apparats = new List<KöksApparater>()
 {
  new KöksApparater("MicroUngn","Electrolux",true),
@@ -17,15 +19,19 @@ List<KöksApparater> apparats = new List<KöksApparater>()
 };
 
 
+// skappar en "class call" attribut för att kunna jobba med all meny för varje del av huvudmeny
 
 Submenu submenu = new Submenu();
 
+// startar huvudmeny
 
 bool menu = true;
 while (menu)
 {
     menu = GenerateMainMenu(apparats, submenu);
 }
+
+// skappade en method som ska skriva ut huvudmeny och låt oss välja vad vi ska göra
 
 static bool GenerateMainMenu(List<KöksApparater> apparats, Submenu submenu)
 {
@@ -79,6 +85,9 @@ static bool GenerateMainMenu(List<KöksApparater> apparats, Submenu submenu)
     }
 
 }
+
+//method som tar användare input och returnerar den eller returnerar vad är som har gått fel
+//methoden används för att välja vilken submeny ska programet köra
 
 static int GetChoice()
 {
