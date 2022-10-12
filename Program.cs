@@ -19,7 +19,7 @@ List<KöksApparater> apparats = new List<KöksApparater>()
 };
 
 
-// skappar en "class call" attribut för att kunna jobba med all meny för varje del av huvudmeny
+// skappar en anropp attribut för att kunna jobba med all meny för varje del av huvudmeny
 
 Submenu submenu = new Submenu();
 

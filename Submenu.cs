@@ -53,11 +53,8 @@ namespace Labb2_ITHS
                     användApparat(lista);
                 }
                 else
-                {
-                    Console.WriteLine("Tillbaka till huvudmeny!\n");
                     ReturnToMain();
-                }
-                    
+                 
                 
             }
             else
@@ -72,11 +69,7 @@ namespace Labb2_ITHS
                     användApparat(lista);
                 }
                 else
-                {
-                    Console.WriteLine("Tillbaka till huvudmeny!\n");
                     ReturnToMain();
-                }
-
             }
 
 
@@ -119,10 +112,7 @@ namespace Labb2_ITHS
                         läggTill(lista);
                     }
                     else
-                    {
-                        Console.WriteLine("Tillbaka till huvudmeny!\n");
                         ReturnToMain();
-                    }
                 }
                 else
                     läggTill(lista);
@@ -141,10 +131,7 @@ namespace Labb2_ITHS
                     läggTill(lista);
                 }
                 else
-                {
-                    Console.WriteLine("Tillbaka till huvudmeny!\n");
                     ReturnToMain();
-                }
             }
           
            
@@ -169,14 +156,9 @@ namespace Labb2_ITHS
                 taBort(lista);
             }
             else
-            {
-                Console.WriteLine("Tillbaka till huvudmeny!\n");
-                ReturnToMain();
-            }
-
-        }
-
-       
+               ReturnToMain();
+         
+        }       
 
         // method som läser in användarens input och returnerar den eller vad är som som har gåt fel
         private static int GetInput(List<KöksApparater> lista)
@@ -185,7 +167,6 @@ namespace Labb2_ITHS
 
             try
             {
-
                 Console.Write("-> ");
                 choice = Int32.Parse(Console.ReadLine());
             }
@@ -254,7 +235,8 @@ namespace Labb2_ITHS
         //på så sätt kan man läsa vad som står på skärmen innan den rensas och huvudmeny skrivas ut
         private static void ReturnToMain()
         {
-            Console.WriteLine("\nTryck ENTER för att gå tillbaka till huvudmeny");
+            Console.WriteLine("\n\nTillbaka till huvudmeny!");
+            Console.WriteLine("Tryck ENTER för att gå tillbaka till huvudmeny");
             if (Console.ReadKey().Key == ConsoleKey.Enter)
                 Console.Clear();
             else
